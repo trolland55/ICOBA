@@ -1,0 +1,16 @@
+input_roi = "C:/Users/folder name/folder name 1/"   
+input_analyze = "C:/Users/folder name/folder name 2/" 
+
+setBatchMode(true); 
+list = getFileList(input_roi);
+listov = getFileList(input_analyze);
+for (i = 0; i < list.length; i++)
+        action(input_roi, input_analyze, list[i], listov[i]);
+setBatchMode(false);
+
+function action(input_roi, input_analyze, filename, olname) {		
+	open(input_roi +filename);			
+	#Run project specific functions
+	open(input_analyze +olname);
+	#Run project specific functions
+}
