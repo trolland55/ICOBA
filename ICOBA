@@ -1,0 +1,29 @@
+input_roi = "C:/Users/folder name/folder name 1/"   
+input_analyze = "C:/Users/folder name/folder name 2/" 
+
+setBatchMode(true); 
+list = getFileList(input_roi);
+listov = getFileList(input_analyze);
+for (i = 0; i < list.length; i++)
+        action(input_roi, input_analyze, list[i], listov[i]);
+setBatchMode(false);
+
+function action(input_roi, input_analyze, filename, olname) {		
+	open(input_roi +filename);			
+	run("8-bit");					
+	setAutoThreshold("Default");
+	//run("Threshold...");
+	setThreshold(#, #);
+	setOption("BlackBackground", false);
+	run("Convert to Mask");
+	run("Create Selection");
+	open(input_analyze +olname);
+	run("8-bit");					
+	setAutoThreshold("Default");
+	//run("Threshold...");
+	setThreshold(#, #);
+	setOption("BlackBackground", false);
+	run("Convert to Mask");
+	run("Restore Selection");
+	run("Analyze Particles...", "display include summarize");
+}
